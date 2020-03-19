@@ -14,38 +14,40 @@ import sys
 #     CAN HAVE THE REMAINDER BE DIVIDED OTHER NUMBERS
 
 
+#   CLASS NOTES
+#       Looking for permuations, probably exponential 3^n?
 def eating_cookies(n, cache=None):
-    # POSSIBLE WAYS = 0
-    # TAKE N
-    total_cookies = n
-    ways = 0
-    # IF 0 RETURN ZERO
+    if cache is None:
+        cache = {}
+    # base cases
     if n <= 0:
-        pass
-    # IF N IS DIVISIBLE BY 1
-    if n % 1 == 0:
-        # ADD 1 WAYS
-        ways += 1
-    # IF N IS DIVISIBLE BY 2
-    if n % 2 == 0:
-        # ADD 1 WAYS
-        ways += 1
-    if n % 3 == 0:
-        ways += 1
-    #   IF REMAINDER/3
-    #     ADD 1 WAYS
-    #   IF N IS DIVISIBLE BY 1
-    #   ADD 1 WAYS
-    # IF N IS DIVISIBLE BY 3
-    #   ADD 1 WAYS
-    #   IF REMAINDER/3
-    #     ADD 1 WAYS
-    # Return ways
+        return 1
+    elif n == 1:
+        return 1
+    elif n == 2:
+        return 2
+    elif n == 3:
+        return 4
+    elif cache and cache[n]:
+        return cache[n]
+    else:
+        cache[n] = eating_cookies(
+            n - 1, cache) + eating_cookies(n - 2, cache) + eating_cookies(n - 3, cache)
 
-    return ways
+    return cache[n]
 
 
-print(eating_cookies(6))
+print(eating_cookies(40, {}))
+# def eating_cookies(n, cache=None):
+#     # POSSIBLE WAYS = 0
+#     # TAKE N
+#     # IF 0 RETURN ZERO
+#     if n < 0:
+#         return n
+#     if n == 0:
+#         return 1
+#     else:
+#         return eating_cookies(n - 1) + eating_cookies(n - 2) + eating_cookies(n - 3)
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
