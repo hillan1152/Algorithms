@@ -7,22 +7,19 @@ import math
 def find_max_profit(prices):
     # BUY LOW NUMBER WITHIN AN ARRAY
     # SELL HIGH LATER IN THE ARRAY
-    current_min_price = 0
-    max_prof = 0
+    profit = []
     # CANNOT BUY AT THE VERY LAST DIGIT IN THE ARRAY
     # MUST SELL IF YOU MAKE IT TO THE LAST PART OF THE ARRAY
-    for i in range(1, len(prices)):
-        price = prices[i]
-        max_prof = max(price - current_min_price)
-        for j in range(1, len(prices)):
-            if j <= i:
+    for i in range(0, len(prices) - 1):
+        buy = i
+        for j in range(i + 1, len(prices)):
+            if buy >= j:
                 pass
-            # elif prices[i] < prices[j]:
-            #   price
             else:
-                difference = (prices[i] - prices[j])
-                max_prof.append(difference)
-    return max_prof
+                current_buy = prices[buy]
+                current_sell = prices[j]
+                profit.append(current_sell - current_buy)
+    return max(profit)
     # LOOP THROUGH THE ARRAY, STARTING WITH THE FIRST NUMBER
     #       (POSSIBLY TRY WHILE LOOP IF BUY != PRICES[-1])
     #   LOOP AGAIN TO GET NEXT NUM IN ARRAY›
