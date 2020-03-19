@@ -1,32 +1,63 @@
 #!/usr/bin/python
 
 # import argparse
+import math
 
 
 def find_max_profit(prices):
     # BUY LOW NUMBER WITHIN AN ARRAY
     # SELL HIGH LATER IN THE ARRAY
-    buy_low = []
-    sell_high = []
+    current_min_price = 0
+    max_prof = 0
     # CANNOT BUY AT THE VERY LAST DIGIT IN THE ARRAY
     # MUST SELL IF YOU MAKE IT TO THE LAST PART OF THE ARRAY
-    for i in range(0, len(prices) - 1):
-        if prices[i] < prices[i + 1]:
-            buy_low.append(prices[i])
-            print(buy_low)
-        elif prices[i + 1] > prices[i]:
-            sell_high.append(prices[i])
-            print(sell_high)
+    for i in range(1, len(prices)):
+        price = prices[i]
+        max_prof = max(price - current_min_price)
+        for j in range(1, len(prices)):
+            if j <= i:
+                pass
+            # elif prices[i] < prices[j]:
+            #   price
+            else:
+                difference = (prices[i] - prices[j])
+                max_prof.append(difference)
+    return max_prof
     # LOOP THROUGH THE ARRAY, STARTING WITH THE FIRST NUMBER
     #       (POSSIBLY TRY WHILE LOOP IF BUY != PRICES[-1])
-    #   LOOP AGAIN TO GET NEXT NUM IN ARRAY
+    #   LOOP AGAIN TO GET NEXT NUM IN ARRAY›
     #     CALCULATE THE DIFFERENCE BETWEEN THE FIRST AND NEXT LOOPED NUMBER
     #     DO IT FOR THE ENTIRE ARRAY
-    #
-    #
+
+# Other Approach
 
 
+def find_max_profit(prices):
+    profits = []
+    for i in range(0, len(prices)-1):
+        buy = i
+        for j in range(i+1, len(prices)):
+            current_sell = prices[j]
+            current_buy = prices[buy]
+            profit = current_sell - current_buy
+            profits.append(profit)
+        return max(profits)
+
+
+# QUICKER AND MOST EFFICIENT
+# def find_max_profit(prices):
+#     current_min_price = prices[0]
+#     max_prof = prices[1] - current_min_price
+#     for i in range(1, len(prices)):
+#         price = prices[i]
+#         max_prof = max(price - current_min_price, max_prof)
+#         current_min_price = min(price, current_min_price)
+#     return max_prof
+
+
+# find_max_profit([1050, 270, 1540, 3800, 2])
 print(find_max_profit([1050, 270, 1540, 3800, 2]))
+# print(find_max_profit([1050, 270, 1540, 3800, 2]))
 # if __name__ == '__main__':
 #     # This is just some code to accept inputs from the command line
 #     parser = argparse.ArgumentParser(
