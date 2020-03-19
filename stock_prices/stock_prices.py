@@ -30,18 +30,16 @@ def find_max_profit(prices):
     #     DO IT FOR THE ENTIRE ARRAY
 
 # Other Approach
-
-
-def find_max_profit(prices):
-    profits = []
-    for i in range(0, len(prices)-1):
-        buy = i
-        for j in range(i+1, len(prices)):
-            current_sell = prices[j]
-            current_buy = prices[buy]
-            profit = current_sell - current_buy
-            profits.append(profit)
-        return max(profits)
+# def find_max_profit(prices):
+#     profits = []
+#     for i in range(0, len(prices)-1):
+#         buy = i
+#         for j in range(i+1, len(prices)):
+#             current_sell = prices[j]
+#             current_buy = prices[buy]
+#             profit = current_sell - current_buy
+#             profits.append(profit)
+#         return max(profits)
 
 
 # QUICKER AND MOST EFFICIENT
