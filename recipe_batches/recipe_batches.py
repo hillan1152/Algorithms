@@ -13,16 +13,39 @@ import math
 
 
 def recipe_batches(recipe, ingredients):
-    # PLAN
-    #   keep track of number of batches available
-    # recipe_amt =
-    #   keep track of ingredient amt
-    #   keep track of recipe amt
-    #
-    #   If values of ingredients (in the entire dictionary) are divisible by #    values of recipe continue
-    #
-    pass
+  # PLAN
+  #   keep track of ingredient amt
+  #     ingredient_amt = 0
+  #    keep track of recipe amt
+  #     recipe_amt = 0
+  #   keep track of number of batches available
+    batches = 0
+  #  batch = ingredients // recipe
+  #   If the length of the recipe > length of ingredients return 0
+  # if len(recipe) > len(ingredients):
+  #     return 0
+  # else:
+  #     for key in ingredients:
+  #         print(key, '->', ingredients[key])
+  #     for key in recipe:
+  #         print(key, '->', recipe[key])
+  #   If values of ingredients (in the entire dictionary) are divisible by #    values of recipe continue
+    for key, value in recipe.items():
+        print("key", key)
+        print("value", value)
+        if key not in ingredients:
+            return 0
+        if batches > ingredients[key] // value:
+            print("ingredients--key -> ", batches)
+            batches = ingredients[key] // value
 
+    return batches
+
+
+recipe = {'milk': 100, 'butter': 50, 'flour': 5}
+ingredients = {'milk': 132, 'butter': 48, 'flour': 51}
+
+recipe_batches(recipe, ingredients)
 
 if __name__ == '__main__':
     # Change the entries of these dictionaries to test
