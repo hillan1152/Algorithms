@@ -2,50 +2,51 @@
 
 import math
 # UNDERSTAND
-#   Take in a DICTIONARY of a RECIPE and AVAILABLE INGREDIENTS
-#     Includes key - values: name - amount
-#   RECIPE DICTIONARY:
-#     amount = amt of each ingredient needed for the recipe
-#   INGREDIENTS DICTIONARY:
-#     amount = amt of the ingredient available to you
-#   GOAL/NEED: Output max number of WHOLE BATCHES
-#      2nd Dictionary represents ingredients dictionary.
+# Param: Recipe
+#     has a dictionary of exact number of ingredients
+# Param: ingredients
+#     has a dictionary of number of ingredients you have
+
+# GOAL: output maximum number of whole batches using the ingredients available
+
+# PLAN: if keys match, continue
+
+recipe = {'milk': 100, 'butter': 50, 'flour': 5}
+ingredients = {'milk': 132, 'butter': 100, 'flour': 51, 'water': 50}
 
 
 def recipe_batches(recipe, ingredients):
-  # PLAN
-  #   keep track of ingredient amt
-  #     ingredient_amt = 0
-  #    keep track of recipe amt
-  #     recipe_amt = 0
-  #   keep track of number of batches available
-    batches = 0
-  #  batch = ingredients // recipe
-  #   If the length of the recipe > length of ingredients return 0
-  # if len(recipe) > len(ingredients):
-  #     return 0
-  # else:
-  #     for key in ingredients:
-  #         print(key, '->', ingredients[key])
-  #     for key in recipe:
-  #         print(key, '->', recipe[key])
-  #   If values of ingredients (in the entire dictionary) are divisible by #    values of recipe continue
-    for key, value in recipe.items():
-        print("key", key)
-        print("value", value)
-        if key not in ingredients:
-            return 0
-        if batches > ingredients[key] // value:
-            print("ingredients--key -> ", batches)
-            batches = ingredients[key] // value
-
-    return batches
+    total_batches = 0
+    while True:
+        if recipe.keys() <= ingredients.keys():
+            for i in ingredients:
+                if ingredients[i] >= recipe[i]:
+                    ingredients[i] -= recipe[i]
+                else:
+                    return total_batches
+            total_batches += 1
+        else:
+            return total_batches
 
 
-recipe = {'milk': 100, 'butter': 50, 'flour': 5}
-ingredients = {'milk': 132, 'butter': 48, 'flour': 51}
+print(recipe_batches(recipe, ingredients))
 
-recipe_batches(recipe, ingredients)
+
+length = len(recipe)
+
+print('\n Length of Recipe --> ', length, '\n')
+# print('\n Messing With Lengths --> ', recipe[length], '\n')
+print('\n Testing Keys --> ', recipe.keys(), '\n')
+# Gets number of ingredients from a dictionary
+print('\n Testing Get --> ', recipe.get('milk'), '\n')
+print('\n Testing Items --> ', recipe.items(), '\n')
+# print('\n Testing FromKeys --> ', recipe.fromkeys(recipe, 100), '\n')
+
+
+if recipe.keys() == ingredients.keys():
+    print('YEP')
+else:
+    print('NOPE')
 
 if __name__ == '__main__':
     # Change the entries of these dictionaries to test
